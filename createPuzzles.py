@@ -36,5 +36,6 @@ def createPuzzles(count, n):
 
     return puzzles
 
+# Driver:
 if __name__ == "__main__":
     puzzles = createPuzzles(100, 3)
