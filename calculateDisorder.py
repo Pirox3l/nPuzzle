@@ -36,12 +36,13 @@ def calculateDisorder(puzzle):
 
     return disorderParameter
 
-# Driver: testing disorder calculation
-puzzle = createPuzzle(3)
-disorderParameter = calculateDisorder(puzzle)
+# Driver: 
+if __name__ == "__main__":
+    puzzle = createPuzzle(3)
+    disorderParameter = calculateDisorder(puzzle)
 
-print(puzzle)
-print(disorderParameter)
+    print(puzzle)
+    print(disorderParameter)
 
 """
 Some Testing Results: 

@@ -27,9 +27,11 @@ def createPuzzle(n):
     return puzzle
 
 # Driver
-puzzle = createPuzzle(3)
-print(puzzle)
+if __name__ == "__main__":
+    puzzle = createPuzzle(3)
+    print(puzzle)
 
+"""
 # Fancy Printout (if needed)
 print(f"+---+---+---+")
 print(f"| {puzzle[0][0]} | {puzzle[0][1]} | {puzzle[0][2]} |")
@@ -38,3 +40,4 @@ print(f"| {puzzle[1][0]} | {puzzle[1][1]} | {puzzle[1][2]} |")
 print(f"+---+---+---+")
 print(f"| {puzzle[2][0]} | {puzzle[2][1]} | {puzzle[2][2]} |")
 print(f"+---+---+---+")
+"""
