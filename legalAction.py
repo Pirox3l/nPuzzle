@@ -15,6 +15,8 @@ def legalAction(x, y, n):
         1. Greater than or equal to 0
         2. Less than the n dimension of the puzzle
         3. For both x and y
+
+    n: is the nxn puzzle board width or length
     """
     legal = False
 

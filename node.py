@@ -16,7 +16,7 @@ class node:
         parent: previous state (np array)
         puzzle: current state (np array)
         blank: location of blank square
-        action: movement from parent to current state
+        action: movement from parent to current state (movement of blank - not other tile)
         gn: total moves so far
         hn: estimated cost to goal
         """

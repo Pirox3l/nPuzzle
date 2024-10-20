@@ -17,7 +17,10 @@ def swap(puzzle):
     # count swaps
     swaps = 0
     
-    for i in range(9): 
+    # size of puzzle (number of values to check)
+    dimension = len(flat)
+
+    for i in range(dimension): 
 
         """
         This loop continues until position i has 

@@ -12,8 +12,9 @@ Previously explored in A*.
 # function to calculate blank
 
 from legalAction import legalAction
+from modifyPuzzle import modifyPuzzle
 
-def generateChilden(currentNode, exploredSet, n):
+def generateChilden(currentNode, exploredSet, n, heuristic):
 
     """
     In general, there are 4 possible children
@@ -26,11 +27,22 @@ def generateChilden(currentNode, exploredSet, n):
     Up, down, left, or right. 
     """
 
+    # when the "currentNode" is removed from the 
+    # priority queue and deemed optimal, it becomes
+    # explored and is added to the explored set
+
     # For the same index i, there is only movement
     # In one direction since a tile can only move
     # Up, down, left, or left, not diagonally
     rowMovements = [-1,0,1,0]
     columnMovements = [0,-1,0,1]
+
+    actions = {
+        1: "Left",
+        2: "Down",
+        3: "Right",
+        4: "Up" 
+    }
 
     blankX = currentNode.blank[0]
     blankY = currentNode.blank[1]
@@ -45,9 +57,14 @@ def generateChilden(currentNode, exploredSet, n):
         # check if position is legal
         legal = legalAction(newX, newY, n)
         
-        # INCOMPLETE HERE:
-        # make a new node given the new coordinates
-        # check if this new node has already been explored
-        # if not, add it to newChildren
-    
-    return
+        if legal:
+            # make a new node given the new coordinates
+            childNode = modifyPuzzle(currentNode, newX, newY, actions[i+1], heuristic)
+            
+            # check if this new node has already been explored: if not, add it to newChildren
+            # we don't want to add a node to the frontier if already explored
+            if ((childNode.puzzle).flatten()) not in exploredSet:
+                newChildren.append((childNode.puzzle).flatten()) 
+
+    # the nodes in newChildren will be added to frontier pq
+    return newChildren
