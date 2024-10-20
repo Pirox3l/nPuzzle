@@ -13,6 +13,9 @@ Previously explored in A*.
 
 from legalAction import legalAction
 from modifyPuzzle import modifyPuzzle
+from createPuzzle import createPuzzle
+from node import node
+import numpy as np
 
 def generateChilden(currentNode, exploredSet, n, heuristic):
 
@@ -34,8 +37,8 @@ def generateChilden(currentNode, exploredSet, n, heuristic):
     # For the same index i, there is only movement
     # In one direction since a tile can only move
     # Up, down, left, or left, not diagonally
-    rowMovements = [-1,0,1,0]
-    columnMovements = [0,-1,0,1]
+    columnMovements = [-1,0,1,0]
+    rowMovements = [0,1,0,-1]
 
     actions = {
         1: "Left",
@@ -60,11 +63,26 @@ def generateChilden(currentNode, exploredSet, n, heuristic):
         if legal:
             # make a new node given the new coordinates
             childNode = modifyPuzzle(currentNode, newX, newY, actions[i+1], heuristic)
-            
+        
             # check if this new node has already been explored: if not, add it to newChildren
             # we don't want to add a node to the frontier if already explored
-            if ((childNode.puzzle).flatten()) not in exploredSet:
-                newChildren.append((childNode.puzzle).flatten()) 
+            if tuple((childNode.puzzle).flatten()) not in exploredSet:
+                newChildren.append(childNode) 
 
     # the nodes in newChildren will be added to frontier pq
     return newChildren
+
+# Driver: testing
+if __name__ == "__main__":
+    puzzle = np.array([[0, 3, 4], [6, 7, 8], [1, 5, 2]])
+    node = node(None, puzzle, [0,0], None, 0, 0)
+    
+    # this is one of the possible movements, I want to see
+    # if it'll filter it out if it was already explored
+    exploredSet = {tuple([3,0,4,6,7,8,1,5,2])}
+
+    list = generateChilden(node, exploredSet, 3, "3")
+    print(puzzle)
+    
+    for i in list:
+        i.print_node()

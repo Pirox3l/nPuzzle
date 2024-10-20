@@ -37,7 +37,7 @@ def modifyPuzzle(parentNode, newX, newY, action, heuristic):
 
     # now modify the puzzle by swapping tiles
     # the blank tile is swapped with [newX, newY]
-    modifiedPuzzle[node.blank[0]][node.blank[1]], modifiedPuzzle[newX][newY] = modifiedPuzzle[newX][newY], modifiedPuzzle[node.blank[0]][node.blank[1]]
+    modifiedPuzzle[parentNode.blank[0]][parentNode.blank[1]], modifiedPuzzle[newX][newY] = modifiedPuzzle[newX][newY], modifiedPuzzle[parentNode.blank[0]][parentNode.blank[1]]
 
     # now calculate the heuristic for the new puzzle
     if heuristic == "1":

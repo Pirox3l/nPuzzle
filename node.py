@@ -37,5 +37,14 @@ class node:
     # We check their fn costs
     def __lt__(self, nxt):
         return self.fn < nxt.fn
-
-
+    
+    def print_node(self):
+        """Print the node's details."""
+        print("Puzzle State:")
+        print(self.puzzle)
+        print(f"Blank Tile Position: {self.blank}")
+        print(f"Action Taken: {self.action}")
+        print(f"g(n) - Total Moves: {self.gn}")
+        print(f"h(n) - Heuristic Value: {self.hn}")
+        print(f"f(n) - Total Cost: {self.fn}")
+        print("-" * 30)
