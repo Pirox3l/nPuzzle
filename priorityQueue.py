@@ -21,7 +21,7 @@ class priorityQueue():
         heapq.heappush(self.queue, node)
 
     def pop(self): 
-        heapq.heappop(self.queue)
+        return heapq.heappop(self.queue)
 
     # since empty lists are considered "false" this is possible
         # Method to know if the Queue is empty
