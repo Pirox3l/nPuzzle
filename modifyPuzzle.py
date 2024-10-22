@@ -40,12 +40,7 @@ def modifyPuzzle(parentNode, newX, newY, action, heuristic):
     modifiedPuzzle[parentNode.blank[0]][parentNode.blank[1]], modifiedPuzzle[newX][newY] = modifiedPuzzle[newX][newY], modifiedPuzzle[parentNode.blank[0]][parentNode.blank[1]]
 
     # now calculate the heuristic for the new puzzle
-    if heuristic == "1":
-        hn = misplacedTiles(modifiedPuzzle)
-    elif heuristic == "2":
-        hn = manhattanDistance(modifiedPuzzle)
-    else:
-        hn = swap(modifiedPuzzle)
+    hn = heuristic(modifiedPuzzle)
 
     # now make the new node with the modified puzzle
     newNode = node(parentNode, modifiedPuzzle, [newX, newY], action, parentNode.gn + 1, hn)

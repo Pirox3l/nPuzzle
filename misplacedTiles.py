@@ -29,7 +29,6 @@ def misplacedTiles(puzzle):
 
         if (tile != 0) and (flat[tile-1] != tile):
             heuristicScore = heuristicScore + 1
-
     return heuristicScore
 
 

@@ -9,13 +9,14 @@ File is a test for 1 puzzle.
 
 from createPuzzles import createPuzzles
 from generateChildren import generateChilden
-from modifyPuzzle import modifyPuzzle
 from node import node
 from priorityQueue import priorityQueue
 from findBlank import findBlank
 from manhattanDistance import manhattanDistance
+from misplacedTiles import misplacedTiles
+from swap import swap
 
-def NPuzzle(n):
+def NPuzzle(n, heuristic):
     """
     n = 3: 8-puzzle
     n = 4: 15-puzzle
@@ -27,13 +28,13 @@ def NPuzzle(n):
     # create 1 puzzles
     puzzles = createPuzzles(1, n)
 
-    print((puzzles[0]))
+    #print((puzzles[0]))
 
     # find blank tile
     blank = findBlank(puzzles[0])
 
     # calculate an example heuristic for this puzzle
-    hn = manhattanDistance(puzzles[0])
+    hn = heuristic(puzzles[0])
 
     # create the exploredSet
     exploredSet = set()
@@ -59,14 +60,14 @@ def NPuzzle(n):
         exploredSet.add(tuple((optimalNode.puzzle).flatten()))
 
         # check if goalState 
-        check = manhattanDistance(optimalNode.puzzle)
+        check = heuristic(optimalNode.puzzle)
 
         if check == 0:
             return optimalNode
 
         else:
             # generate children
-            newFrontiers = generateChilden(optimalNode, exploredSet, n, "2")
+            newFrontiers = generateChilden(optimalNode, exploredSet, n, heuristic)
 
             # add these to the frontier
             for childNode in newFrontiers:
@@ -76,8 +77,21 @@ def NPuzzle(n):
 
 
 if __name__ == "__main__":
-    on = NPuzzle(3)
-
-    while on is not None:
-        on.print_node()
-        on = on.parent
+    num_test = 100
+    avg_cost = 0
+    i = 0
+    # solves num_test instances of the tile puzzle
+    for heuristic in [misplacedTiles, manhattanDistance, swap]:
+        while i < num_test:
+            on = NPuzzle(3, manhattanDistance)
+            avg_cost += on.fn
+            
+            on.print_node()
+            while on.parent is not None:
+                on.print_node()
+                on = on.parent
+            
+        
+            i+=1
+        avg_cost = avg_cost/100
+    print(f"Average cost:{avg_cost}")
